@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الدفع الآمن</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f4f5f7;
+      color: #333;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+
+    .page {
+      width: min(100%, 430px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 22px rgba(0, 0, 0, .1);
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      height: 58px;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+
+    .back {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      color: #555;
+      font-size: 30px;
+      text-decoration: none;
+    }
+
+    .header-title {
+      margin: 0;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .form {
+      padding: 22px 18px 26px;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #3f3f3f;
+      font-size: 17px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 50px;
+      border: 1px solid #e1e1e1;
+      border-radius: 8px;
+      padding: 0 14px;
+      background: #fff;
+      color: #333;
+      font-size: 16px;
+      font-family: Arial, Tahoma, sans-serif;
+      outline: 0;
+      appearance: none;
+    }
+
+    input::placeholder {
+      color: #a4a4a4;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #1577d3;
+      box-shadow: 0 0 0 2px rgba(21, 119, 211, .12);
+    }
+
+    .error input {
+      border-color: #c84e5b;
+    }
+
+    .field.valid input,
+    .field.valid select,
+    .field.valid .id-wrap,
+    .field.valid .phone-wrap {
+      border-color: #1577d3;
+      box-shadow: 0 0 0 2px rgba(21, 119, 211, .1);
+    }
+
+    .field.valid .hint {
+      display: none;
+    }
+
+    .hint {
+      margin: 8px 0 0;
+      color: #c84e5b;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::before {
+      content: "⌄";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      color: #777;
+      font-size: 22px;
+      line-height: 1;
+      transform: translateY(-54%);
+      pointer-events: none;
+    }
+
+    select {
+      padding-left: 44px;
+      color: #222;
+      font-weight: 700;
+    }
+
+    .id-wrap,
+    .phone-wrap {
+      display: grid;
+      align-items: center;
+      border: 1px solid #e1e1e1;
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .id-wrap {
+      grid-template-columns: 36px 1fr;
+    }
+
+    .phone-wrap {
+      grid-template-columns: 1fr 92px;
+      direction: ltr;
+    }
+
+    .id-wrap input,
+    .phone-wrap input {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .info {
+      display: grid;
+      place-items: center;
+      color: #777;
+      font-size: 18px;
+    }
+
+    .code {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-right: 1px solid #eee;
+      color: #222;
+      font-size: 18px;
+      background: #fff;
+    }
+
+    .flag {
+      width: 26px;
+      height: 18px;
+      border: 1px solid #ddd;
+      background:
+        linear-gradient(135deg, #000 0 28%, transparent 28%),
+        linear-gradient(#007a3d 0 33%, #fff 33% 66%, #ce1126 66%);
+    }
+
+    .save {
+      width: 100%;
+      height: 54px;
+      margin-top: 4px;
+      border: 0;
+      border-radius: 8px;
+      background: #e6005a;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      font-family: Arial, Tahoma, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(230, 0, 90, .22);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="back" href="fake-product-page.html" aria-label="رجوع">←</a>
+      <p class="header-title">الدفع الآمن</p>
+      <span></span>
+    </header>
+
+    <form class="form" id="addressForm">
+      <h1>عنوان التوصيل</h1>
+
+      <div class="field error">
+        <label for="firstName">الاسم الأول</label>
+        <input id="firstName" name="firstName" type="text" placeholder="مثلاً لطيفة" autocomplete="given-name">
+        <p class="hint">الرجاء إدخال الاسم الأول</p>
+      </div>
+
+      <div class="field error">
+        <label for="lastName">اسم العائلة</label>
+        <input id="lastName" name="lastName" type="text" placeholder="مثلاً عبدالله" autocomplete="family-name">
+        <p class="hint">الرجاء إدخال اسم العائلة</p>
+      </div>
+
+      <div class="field">
+        <label for="country">الدولة</label>
+        <div class="select-wrap">
+          <select id="country" name="country">
+            <option>الكويت</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="city">المدينة</label>
+        <div class="select-wrap">
+          <select id="city" name="city">
+            <option>مدينة الكويت</option>
+            <option>حولي</option>
+            <option>السالمية</option>
+            <option>الفروانية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="area">المنطقة</label>
+        <div class="select-wrap">
+          <select id="area" name="area">
+            <option>اختاري الحي</option>
+            <option>العباسية</option>
+            <option>عبد الله السالم</option>
+            <option>العديلية</option>
+            <option>المنصورية</option>
+            <option>حدائق السور</option>
+            <option>جزيرة عوهة</option>
+            <option>بندر</option>
+            <option>شاليهات الدوحة</option>
+            <option>الدعية</option>
+            <option>الدسمة</option>
+            <option>دسمان</option>
+            <option>الدوحة</option>
+            <option>ميناء الدوحة</option>
+            <option>الفيحاء</option>
+            <option>فيلكا</option>
+            <option>غرناطة</option>
+            <option>المنطقة الصحية</option>
+            <option>مدينة جابر الأحمد</option>
+            <option>جبلة</option>
+            <option>كيفان</option>
+            <option>الخالدية</option>
+            <option>جزيرة كبر</option>
+            <option>مدينة الكويت</option>
+            <option>المنصورية</option>
+            <option>المرقاب</option>
+            <option>جزيرة مسكان</option>
+            <option>معسكرات المباركية</option>
+            <option>النهضة</option>
+            <option>شمال غرب الصليبيخات</option>
+            <option>النزهة</option>
+            <option>القادسية</option>
+            <option>القيروان</option>
+            <option>جزيرة قاروه</option>
+            <option>قرطبة</option>
+            <option>الروضة</option>
+            <option>الصوابر</option>
+            <option>الشامية</option>
+            <option>شرق</option>
+            <option>الشويخ</option>
+            <option>الشويخ الصناعية 1</option>
+            <option>الشويخ الصناعية 2</option>
+            <option>الشويخ الصناعية 3</option>
+            <option>ميناء الشويخ</option>
+            <option>الصليبيخات</option>
+            <option>السرة</option>
+            <option>الواجهة البحرية</option>
+            <option>جزيرة أم النمل</option>
+            <option>جزيرة أم المرادم</option>
+            <option>اليرموك</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="street">الشارع / علامة مميزة للعنوان</label>
+        <input id="street" name="street" type="text" placeholder="مثال: الشارع الرئيسي، بالقرب من وسط المدينة" autocomplete="street-address">
+      </div>
+
+      <div class="field">
+        <label for="building">رقم المبنى / الشقة</label>
+        <input id="building" name="building" type="text" placeholder="مثال: برج النور، الطابق الثالث، شقة 12">
+      </div>
+
+      <div class="field">
+        <label for="civilId">رقم الهوية المدني</label>
+        <div class="id-wrap">
+          <span class="info" aria-hidden="true">ⓘ</span>
+          <input id="civilId" name="civilId" type="text" inputmode="numeric" placeholder="أدخلي رقم الهوية المدني المكوّن من 12 رقماً">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="phone">رقم الجوال</label>
+        <div class="phone-wrap">
+          <input id="phone" name="phone" type="tel" placeholder="" autocomplete="tel">
+          <div class="code"><span class="flag"></span><span>+965</span></div>
+        </div>
+      </div>
+
+      <button class="save" type="submit">حفظ العنوان</button>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById('addressForm');
+    const requiredIds = ['firstName', 'lastName', 'street', 'building', 'civilId', 'phone'];
+    const area = document.getElementById('area');
+
+    function fieldFor(input) {
+      return input.closest('.field');
+    }
+
+    function markField(input) {
+      const field = fieldFor(input);
+      if (!field) return false;
+      const filled = input.value.trim().length > 0;
+      field.classList.toggle('valid', filled);
+      field.classList.toggle('error', !filled && (input.id === 'firstName' || input.id === 'lastName'));
+      return filled;
+    }
+
+    requiredIds.forEach((id) => {
+      const input = document.getElementById(id);
+      input.addEventListener('input', () => markField(input));
+    });
+
+    area.addEventListener('change', () => {
+      const field = fieldFor(area);
+      field.classList.toggle('valid', area.selectedIndex > 0);
+      field.classList.toggle('error', area.selectedIndex === 0);
+    });
+
+    form.addEventListener('submit', (event) => {
+      const allFilled = requiredIds.every((id) => markField(document.getElementById(id)));
+      const areaSelected = area.selectedIndex > 0;
+      fieldFor(area).classList.toggle('valid', areaSelected);
+      fieldFor(area).classList.toggle('error', !areaSelected);
+
+      if (!allFilled || !areaSelected) {
+        event.preventDefault();
+        return;
+      }
+
+      event.preventDefault();
+      window.location.href = 'payment-confirm.html';
+    });
+  </script>
+</body>
+</html>

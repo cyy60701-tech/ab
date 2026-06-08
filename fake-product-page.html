@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مجلة جديدة</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f7f7;
+      color: #191919;
+      font-family: Arial, Tahoma, sans-serif;
+      line-height: 1.8;
+    }
+
+    .page {
+      width: min(100%, 430px);
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      box-shadow: 0 0 24px rgba(0, 0, 0, .08);
+    }
+
+    .hero {
+      padding: 18px 18px 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .page-link {
+      display: block;
+      padding: 12px 18px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+      color: #c5004b;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #f1f1f1;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 0 4px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .scroll-hint span {
+      width: 7px;
+      height: 7px;
+      border-right: 1px solid #999;
+      border-bottom: 1px solid #999;
+      transform: rotate(45deg);
+      margin-top: -4px;
+    }
+
+    .articles {
+      padding: 12px 18px 80px;
+    }
+
+    .article {
+      padding: 18px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .product-insert {
+      padding: 18px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .product-insert img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid #f1f1f1;
+      background: #fff;
+    }
+
+    .product-card-wrap {
+      position: relative;
+    }
+
+    .card-plus {
+      position: absolute;
+      left: 3.5%;
+      bottom: 3.8%;
+      width: 13%;
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .card-plus:focus-visible {
+      outline: 3px solid #e40052;
+      outline-offset: 3px;
+    }
+
+    .offer-card {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      left: 10px;
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #f0d9e1;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .13);
+      z-index: 3;
+    }
+
+    .offer-thumb {
+      width: 74px;
+      height: 74px;
+      object-fit: cover;
+      border: 1px solid #f3e0e6;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    .offer-title {
+      margin: 0 0 2px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .offer-subtitle {
+      margin: 0 0 6px;
+      color: #8d6d78;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .offer-price {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      margin-bottom: 8px;
+      direction: ltr;
+      justify-content: flex-end;
+    }
+
+    .old-price {
+      color: #777;
+      font-size: 12px;
+      text-decoration: line-through;
+    }
+
+    .new-price {
+      color: #e40052;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .discount-badge {
+      color: #fff;
+      background: #e40052;
+      border-radius: 999px;
+      padding: 3px 7px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .offer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .offer-btn {
+      min-height: 34px;
+      border: 1px solid #e40052;
+      border-radius: 999px;
+      background: #fff;
+      color: #e40052;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: Arial, Tahoma, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .offer-btn.primary {
+      display: grid;
+      place-items: center;
+      background: #e40052;
+      color: #fff;
+    }
+
+    .vertical-shop {
+      padding: 14px 18px 18px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+
+    .vertical-frame {
+      position: relative;
+      height: 520px;
+      overflow: hidden;
+      border: 1px solid #f1dce4;
+      border-radius: 6px;
+      background: #f8eef2;
+    }
+
+    .vertical-frame img {
+      display: block;
+      width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      animation: verticalPan 8s ease-in-out infinite alternate;
+    }
+
+    .vertical-buy-card {
+      position: absolute;
+      right: 10px;
+      left: 10px;
+      bottom: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .14);
+    }
+
+    .vertical-buy-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .vertical-buy-text {
+      margin: 0;
+      color: #8d6d78;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .vertical-buy-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    @keyframes verticalPan {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-36px);
+      }
+    }
+
+    .image-cta {
+      position: relative;
+      margin: 8px 0 10px;
+    }
+
+    .image-cta img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .shop-overlay {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 4px;
+      background: #0b0b0b;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+    }
+
+    .simple-price {
+      position: absolute;
+      right: 12px;
+      bottom: 66px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #e40052;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(228, 0, 82, .24);
+      z-index: 2;
+    }
+
+    .simple-buy-card {
+      position: absolute;
+      right: 10px;
+      left: 10px;
+      bottom: 10px;
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid #f0d9e1;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .13);
+      z-index: 3;
+    }
+
+    .simple-buy-card .simple-price {
+      position: static;
+      justify-self: end;
+      max-width: 100%;
+      line-height: 1.35;
+      text-align: right;
+      box-shadow: none;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    p {
+      margin: 0 0 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .date {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .more {
+      display: inline-block;
+      color: #c5004b;
+      font-size: 13px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .float {
+      position: fixed;
+      left: max(12px, calc(50% - 205px));
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .bubble {
+      border: 0;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e40052;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      font-family: Arial, Tahoma, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(228, 0, 82, .28);
+    }
+
+    .bubble.dark {
+      background: #222a33;
+      box-shadow: 0 0 0 6px rgba(34, 42, 51, .22);
+    }
+
+    .cart-pill {
+      min-width: 76px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #e40052;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(228, 0, 82, .24);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .2s ease, transform .2s ease;
+      pointer-events: none;
+    }
+
+    .cart-pill.show {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    @media (min-width: 700px) {
+      .page {
+        margin-top: 18px;
+        margin-bottom: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="page-link" href="fake-product-page.html">مجلة جديدة</a>
+
+    <section class="hero" aria-label="بطاقة المنتج">
+      <div class="product-card-wrap">
+        <img src="assets/first-page-main.webp" alt="ملحقات جهاز إزالة الشعر">
+        <button class="card-plus add-cart" type="button" aria-label="إضافة Air 3 إلى السلة">إضافة إلى السلة</button>
+        <div class="offer-card" aria-label="عرض باكج عيادة">
+          <img class="offer-thumb" src="assets/first-page-main.webp" alt="">
+          <div>
+            <p class="offer-title">باكج عيادة اوبسلا - 5 في 1</p>
+            <p class="offer-subtitle">خمس عدسات مع عرض خاص</p>
+            <div class="offer-price">
+              <span class="discount-badge">خصم 30%</span>
+              <span class="old-price">140 د.ك</span>
+              <span class="new-price">98 د.ك</span>
+            </div>
+            <div class="offer-actions">
+              <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+              <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">مقالات وتجارب أسفل الصفحة <span aria-hidden="true"></span></div>
+    </section>
+
+    <section class="vertical-shop" aria-label="عرض شراء متحرك">
+      <div class="vertical-frame">
+        <img src="assets/clinic-cooling-lens.webp" alt="عدسة تبريد داخلي لجهاز إزالة الشعر">
+        <div class="vertical-buy-card">
+          <p class="vertical-buy-title">عدسة تبريد داخلي</p>
+          <p class="vertical-buy-text">عرض خاص للشراء مع حركة رأسية داخل الصفحة</p>
+          <div class="offer-price">
+            <span class="discount-badge">خصم 50%</span>
+            <span class="old-price">4 د.ك</span>
+            <span class="new-price">2 د.ك</span>
+          </div>
+          <div class="vertical-buy-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero" aria-label="عرض المنتج الثالث">
+      <div class="product-card-wrap">
+        <img src="assets/shopping.webp" alt="جهاز إزالة الشعر مع نظارة حماية">
+        <div class="simple-buy-card">
+          <div class="simple-price">30 د.ك</div>
+          <div class="offer-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero" aria-label="عرض المنتج الرابع">
+      <div class="product-card-wrap">
+        <img src="assets/laser-offer-fourth.jpg" alt="جهاز إزالة الشعر مع ملحقات ونظارة حماية">
+        <div class="simple-buy-card">
+          <div class="simple-price">خصم 30% - 60 د.ك</div>
+          <div class="offer-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero" aria-label="عرض المنتج الخامس">
+      <div class="product-card-wrap">
+        <img src="assets/laser-device-fifth.jpg" alt="جهاز ليزر لإزالة الشعر">
+        <div class="simple-buy-card">
+          <div class="simple-price">خصم 50% - 200 د.ك</div>
+          <div class="offer-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero" aria-label="عرض المنتج السادس">
+      <div class="product-card-wrap">
+        <img src="assets/lumea-sixth.webp" alt="جهاز إزالة الشعر مع ملحقاته">
+        <div class="simple-buy-card">
+          <div class="simple-price">خصم 40% - 44 د.ك</div>
+          <div class="offer-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero" aria-label="عرض المنتج مع هدية">
+      <div class="product-card-wrap">
+        <img src="assets/lumea-phone-gift.webp" alt="جهاز إزالة الشعر مع هاتف جوال هدية">
+        <div class="simple-buy-card">
+          <div class="simple-price">خصم 50% - 80 د.ك + هاتف جوال هدية</div>
+          <div class="offer-actions">
+            <button class="offer-btn add-cart" type="button">إضافة للسلة</button>
+            <a class="offer-btn primary" href="order-form.html">اشتري الآن</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="articles" aria-label="مقالات">
+      <article class="article">
+        <div class="image-cta">
+          <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="">
+          <a class="shop-overlay" href="order-form.html">اشتري الآن</a>
+        </div>
+        <h2>إزالة شعر الجسم بتقنية IPL: ما الذي يجب معرفته قبل البدء؟</h2>
+        <p>تعمل تقنية IPL على إرسال ومضات ضوئية لطيفة تستهدف بصيلات الشعر، ويمكن استخدامها ضمن روتين عناية منزلي منتظم.</p>
+        <div class="date">28 مايو 2026</div>
+        <a class="more" href="https://air3-care.example.com/blog/ipl-before-first-use">يتعلم أكثر</a>
+      </article>
+
+      <article class="article">
+        <div class="image-cta">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=80" alt="">
+          <a class="shop-overlay" href="order-form.html">اشتري الآن</a>
+        </div>
+        <h2>كيفية إزالة شعر الجسم بأمان في المنزل دون تهيج</h2>
+        <p>تبدأ الراحة من اختيار طريقة مناسبة للبشرة وتجربة الجهاز على منطقة صغيرة قبل الاستخدام الكامل.</p>
+        <div class="date">26 مايو 2026</div>
+        <a class="more" href="https://air3-care.example.com/blog/safe-home-hair-removal">يتعلم أكثر</a>
+      </article>
+
+      <article class="article">
+        <div class="image-cta">
+          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80" alt="">
+          <a class="shop-overlay" href="order-form.html">اشتري الآن</a>
+        </div>
+        <h2>طرق إزالة شعر الجسم: كيف تختارين الطريقة المناسبة؟</h2>
+        <p>تختلف النتائج حسب نوع البشرة وكثافة الشعر، لذلك يساعدك فهم الخيارات على اختيار روتين أكثر راحة.</p>
+        <div class="date">25 مايو 2026</div>
+        <a class="more" href="https://air3-care.example.com/blog/choose-hair-removal-method">يتعلم أكثر</a>
+      </article>
+
+      <article class="article">
+        <div class="image-cta">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80" alt="">
+          <a class="shop-overlay" href="order-form.html">اشتري الآن</a>
+        </div>
+        <h2>استخدام قناع الوجه الأحمر مع الروتين المنزلي</h2>
+        <p>يمكن دمج العناية بالوجه مع خطوات بسيطة ومنظمة للحصول على تجربة منزلية هادئة.</p>
+        <div class="date">24 مايو 2026</div>
+        <a class="more" href="https://air3-care.example.com/blog/home-beauty-routine">يتعلم أكثر</a>
+      </article>
+    </section>
+  </main>
+
+  <div class="float">
+    <button class="bubble dark" type="button" id="plusCounter" aria-label="زيادة العدد">+</button>
+    <a class="cart-pill" id="cartPill" href="order-form.html" aria-live="polite">السلة 0</a>
+  </div>
+
+  <script>
+    const addCartButtons = document.querySelectorAll('.add-cart');
+    const plusCounter = document.getElementById('plusCounter');
+    const cartPill = document.getElementById('cartPill');
+    let count = 0;
+
+    function addToCart() {
+      count += 1;
+      plusCounter.textContent = count;
+      plusCounter.setAttribute('aria-label', `في السلة ${count}`);
+      cartPill.textContent = `السلة ${count}`;
+      cartPill.classList.add('show');
+    }
+
+    addCartButtons.forEach((button) => {
+      button.addEventListener('click', addToCart);
+    });
+  </script>
+</body>
+</html>

