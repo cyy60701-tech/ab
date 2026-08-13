@@ -3,13 +3,139 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=fake-product-page.html">
-  <title>جاري فتح الصفحة</title>
-  <script>
-    window.location.replace('fake-product-page.html');
-  </script>
+  <title>عروض أجهزة إزالة الشعر</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f7f7f7;
+      color: #191919;
+      font-family: Arial, Tahoma, sans-serif;
+      line-height: 1.8;
+    }
+    .page {
+      width: min(100%, 430px);
+      margin: 0 auto;
+      background: #fff;
+      min-height: 100vh;
+      box-shadow: 0 0 24px rgba(0,0,0,.08);
+    }
+    .top-bar {
+      padding: 14px 18px;
+      background: #e40052;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .hero-img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .section {
+      padding: 18px 18px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .section:last-child { border-bottom: 0; }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    p {
+      margin: 0 0 10px;
+      color: #444;
+      font-size: 14px;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+      direction: ltr;
+      justify-content: flex-end;
+    }
+    .old-price { color: #999; font-size: 14px; text-decoration: line-through; }
+    .new-price { color: #e40052; font-size: 22px; font-weight: 800; }
+    .badge {
+      background: #e40052;
+      color: #fff;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .cta {
+      display: block;
+      width: 100%;
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 0;
+      border-radius: 8px;
+      background: #e40052;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      font-family: Arial, Tahoma, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(228,0,82,.22);
+    }
+    .cta.outline {
+      background: #fff;
+      color: #e40052;
+      border: 2px solid #e40052;
+      box-shadow: none;
+    }
+    .products { padding: 18px; display: grid; gap: 14px; }
+    .card {
+      border: 1px solid #f0d9e1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .card img { display: block; width: 100%; height: auto; }
+    .card-body { padding: 12px; }
+    .card-title { margin: 0 0 4px; font-size: 15px; font-weight: 800; }
+    .card-sub { margin: 0 0 10px; color: #888; font-size: 13px; }
+  </style>
 </head>
 <body>
-  <p><a href="fake-product-page.html">فتح الصفحة الأولى</a></p>
+  <main class="page">
+    <div class="top-bar">⚡ عروض حصرية محدودة – اطلب الآن واستلم خلال 24 ساعة</div>
+
+    <section class="section">
+      <img class="hero-img" src="assets/first-page-main.webp" alt="جهاز إزالة الشعر بتقنية IPL">
+      <h2 style="margin-top:14px;">جهاز إزالة الشعر بتقنية IPL – باكج عيادة 5 في 1</h2>
+      <p>خمس عدسات متخصصة لجميع مناطق الجسم مع ضمان النتيجة خلال 4 أسابيع.</p>
+      <div class="price-row">
+        <span class="badge">خصم 30%</span>
+        <span class="old-price">140 د.ك</span>
+        <span class="new-price">98 د.ك</span>
+      </div>
+      <a class="cta" href="calculator.html">احسب سعرك واطلب الآن</a>
+      <a class="cta outline" href="calculator.html">اعرف المزيد</a>
+    </section>
+
+    <div class="products">
+      <div class="card">
+        <img src="assets/clinic-cooling-lens.webp" alt="عدسة تبريد داخلي">
+        <div class="card-body">
+          <p class="card-title">عدسة تبريد داخلي</p>
+          <p class="card-sub">خصم 50% – 2 د.ك بدلاً من 4 د.ك</p>
+          <a class="cta" href="calculator.html">اطلب الآن</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/shopping.webp" alt="جهاز مع نظارة حماية">
+        <div class="card-body">
+          <p class="card-title">جهاز إزالة الشعر + نظارة حماية</p>
+          <p class="card-sub">30 د.ك</p>
+          <a class="cta" href="calculator.html">اطلب الآن</a>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

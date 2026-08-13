@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الخطوة 2 – عنوان التوصيل</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f4f5f7;
+      color: #333;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+    .page {
+      width: min(100%, 430px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 22px rgba(0,0,0,.1);
+    }
+    .header {
+      position: sticky; top: 0; z-index: 2;
+      height: 58px;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+    .back {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      color: #555; font-size: 30px;
+      text-decoration: none;
+    }
+    .header-title { margin: 0; text-align: center; font-size: 20px; font-weight: 800; }
+    .steps {
+      display: flex; justify-content: center; gap: 8px;
+      padding: 14px 18px; border-bottom: 1px solid #eee;
+    }
+    .step {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 800;
+      border: 2px solid #ddd; color: #999;
+    }
+    .step.active { border-color: #e40052; background: #e40052; color: #fff; }
+    .step.done { border-color: #18a957; background: #18a957; color: #fff; }
+    .form { padding: 22px 18px 32px; }
+    h1 { margin: 0 0 22px; font-size: 21px; font-weight: 800; }
+    .field { margin-bottom: 20px; }
+    label {
+      display: block; margin-bottom: 8px;
+      color: #3f3f3f; font-size: 16px; font-weight: 800;
+    }
+    input, select {
+      width: 100%; height: 50px;
+      border: 1px solid #e1e1e1; border-radius: 8px;
+      padding: 0 14px;
+      background: #fff; color: #333;
+      font-size: 16px; font-family: Arial, Tahoma, sans-serif;
+      outline: 0; appearance: none;
+    }
+    input::placeholder { color: #a4a4a4; }
+    input:focus, select:focus { border-color: #1577d3; box-shadow: 0 0 0 2px rgba(21,119,211,.12); }
+    .field.error input, .field.error select { border-color: #c84e5b; }
+    .hint { margin: 6px 0 0; color: #c84e5b; font-size: 13px; font-weight: 700; display: none; }
+    .field.error .hint { display: block; }
+    .select-wrap { position: relative; }
+    .select-wrap::before {
+      content: "⌄"; position: absolute; left: 16px; top: 50%;
+      color: #777; font-size: 22px; line-height: 1;
+      transform: translateY(-54%); pointer-events: none;
+    }
+    select { padding-left: 44px; color: #222; font-weight: 700; }
+    .id-wrap {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      align-items: center;
+      border: 1px solid #e1e1e1; border-radius: 8px;
+      background: #fff; overflow: hidden;
+    }
+    .id-wrap input { border: 0; border-radius: 0; box-shadow: none; }
+    .info { display: grid; place-items: center; color: #777; font-size: 18px; }
+    .save {
+      width: 100%; height: 54px; margin-top: 4px;
+      border: 0; border-radius: 8px;
+      background: #e6005a; color: #fff;
+      font-size: 18px; font-weight: 800;
+      font-family: Arial, Tahoma, sans-serif;
+      cursor: pointer; box-shadow: 0 8px 18px rgba(230,0,90,.22);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="back" href="step1.html" aria-label="رجوع">←</a>
+      <p class="header-title">عنوان التوصيل</p>
+      <span></span>
+    </header>
+    <div class="steps" aria-label="خطوات الطلب">
+      <div class="step done" aria-label="الخطوة 1 – مكتملة">✓</div>
+      <div class="step active" aria-label="الخطوة 2 – الحالية">2</div>
+      <div class="step" aria-label="الخطوة 3">3</div>
+    </div>
+    <form class="form" id="step2Form" novalidate>
+      <h1>عنوان التوصيل</h1>
+
+      <div class="field">
+        <label for="country">الدولة</label>
+        <div class="select-wrap">
+          <select id="country" name="country">
+            <option>الكويت</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="city">المدينة</label>
+        <div class="select-wrap">
+          <select id="city" name="city">
+            <option>مدينة الكويت</option>
+            <option>حولي</option>
+            <option>السالمية</option>
+            <option>الفروانية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" id="f-area">
+        <label for="area">المنطقة</label>
+        <div class="select-wrap">
+          <select id="area" name="area">
+            <option value="">اختاري الحي</option>
+            <option>العباسية</option>
+            <option>عبد الله السالم</option>
+            <option>العديلية</option>
+            <option>المنصورية</option>
+            <option>حدائق السور</option>
+            <option>الدعية</option>
+            <option>الدسمة</option>
+            <option>دسمان</option>
+            <option>الدوحة</option>
+            <option>الفيحاء</option>
+            <option>غرناطة</option>
+            <option>مدينة جابر الأحمد</option>
+            <option>جبلة</option>
+            <option>كيفان</option>
+            <option>الخالدية</option>
+            <option>مدينة الكويت</option>
+            <option>المرقاب</option>
+            <option>النهضة</option>
+            <option>النزهة</option>
+            <option>القادسية</option>
+            <option>قرطبة</option>
+            <option>الروضة</option>
+            <option>الشامية</option>
+            <option>شرق</option>
+            <option>الشويخ</option>
+            <option>الصليبيخات</option>
+            <option>السرة</option>
+            <option>اليرموك</option>
+          </select>
+        </div>
+        <p class="hint">الرجاء اختيار المنطقة</p>
+      </div>
+
+      <div class="field" id="f-street">
+        <label for="street">الشارع / علامة مميزة</label>
+        <input id="street" name="street" type="text" placeholder="مثال: الشارع الرئيسي، بالقرب من وسط المدينة" autocomplete="street-address">
+        <p class="hint">الرجاء إدخال اسم الشارع</p>
+      </div>
+
+      <div class="field" id="f-building">
+        <label for="building">رقم المبنى / الشقة</label>
+        <input id="building" name="building" type="text" placeholder="مثال: برج النور، الطابق الثالث، شقة 12">
+        <p class="hint">الرجاء إدخال رقم المبنى</p>
+      </div>
+
+      <div class="field" id="f-civilId">
+        <label for="civilId">رقم الهوية المدني</label>
+        <div class="id-wrap">
+          <span class="info" aria-hidden="true">ⓘ</span>
+          <input id="civilId" name="civilId" type="text" inputmode="numeric" placeholder="رقم الهوية المدني المكوّن من 12 رقماً">
+        </div>
+        <p class="hint">الرجاء إدخال رقم الهوية</p>
+      </div>
+
+      <button class="save" type="submit">التالي – تأكيد الطلب</button>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById('step2Form');
+    const area = document.getElementById('area');
+    const textFields = [
+      { id: 'street', wrap: 'f-street' },
+      { id: 'building', wrap: 'f-building' },
+      { id: 'civilId', wrap: 'f-civilId' }
+    ];
+
+    function validateInput(id, wrapId) {
+      const input = document.getElementById(id);
+      const wrap = document.getElementById(wrapId);
+      const ok = input.value.trim().length > 0;
+      wrap.classList.toggle('error', !ok);
+      return ok;
+    }
+
+    function validateArea() {
+      const ok = area.value !== '';
+      document.getElementById('f-area').classList.toggle('error', !ok);
+      return ok;
+    }
+
+    textFields.forEach(function(f) {
+      document.getElementById(f.id).addEventListener('input', function() { validateInput(f.id, f.wrap); });
+    });
+    area.addEventListener('change', validateArea);
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const allOk = textFields.every(function(f) { return validateInput(f.id, f.wrap); }) && validateArea();
+      if (!allOk) return;
+      sessionStorage.setItem('delivery_area', area.value);
+      sessionStorage.setItem('delivery_street', document.getElementById('street').value.trim());
+      sessionStorage.setItem('delivery_building', document.getElementById('building').value.trim());
+      window.location.href = 'step3.html';
+    });
+  </script>
+</body>
+</html>
