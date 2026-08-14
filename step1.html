@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الخطوة 1 – معلومات المشتري</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f4f5f7;
+      color: #333;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+    .page {
+      width: min(100%, 430px);
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 22px rgba(0,0,0,.1);
+    }
+    .header {
+      position: sticky; top: 0; z-index: 2;
+      height: 58px;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+    .back {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      color: #555; font-size: 30px;
+      text-decoration: none;
+    }
+    .header-title { margin: 0; text-align: center; font-size: 20px; font-weight: 800; }
+    .steps {
+      display: flex; justify-content: center; gap: 8px;
+      padding: 14px 18px; border-bottom: 1px solid #eee;
+    }
+    .step {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 13px; font-weight: 800;
+      border: 2px solid #ddd;
+      color: #999;
+    }
+    .step.active { border-color: #e40052; background: #e40052; color: #fff; }
+    .step.done { border-color: #18a957; background: #18a957; color: #fff; }
+    .form { padding: 22px 18px 32px; }
+    h1 { margin: 0 0 22px; font-size: 21px; font-weight: 800; }
+    .field { margin-bottom: 20px; }
+    label {
+      display: block; margin-bottom: 8px;
+      color: #3f3f3f; font-size: 16px; font-weight: 800;
+    }
+    input {
+      width: 100%; height: 50px;
+      border: 1px solid #e1e1e1; border-radius: 8px;
+      padding: 0 14px;
+      background: #fff; color: #333;
+      font-size: 16px; font-family: Arial, Tahoma, sans-serif;
+      outline: 0;
+    }
+    input::placeholder { color: #a4a4a4; }
+    input:focus { border-color: #1577d3; box-shadow: 0 0 0 2px rgba(21,119,211,.12); }
+    .field.error input { border-color: #c84e5b; }
+    .hint { margin: 6px 0 0; color: #c84e5b; font-size: 13px; font-weight: 700; display: none; }
+    .field.error .hint { display: block; }
+    .phone-wrap {
+      display: grid;
+      grid-template-columns: 1fr 92px;
+      direction: ltr;
+      border: 1px solid #e1e1e1; border-radius: 8px;
+      overflow: hidden;
+    }
+    .phone-wrap input { border: 0; border-radius: 0; box-shadow: none; }
+    .code {
+      height: 50px; display: flex; align-items: center;
+      justify-content: center; gap: 8px;
+      border-right: 1px solid #eee;
+      color: #222; font-size: 16px; background: #fff;
+    }
+    .flag {
+      width: 26px; height: 18px; border: 1px solid #ddd;
+      background: linear-gradient(135deg,#000 0 28%,transparent 28%),
+                  linear-gradient(#007a3d 0 33%,#fff 33% 66%,#ce1126 66%);
+    }
+    .save {
+      width: 100%; height: 54px; margin-top: 4px;
+      border: 0; border-radius: 8px;
+      background: #e6005a; color: #fff;
+      font-size: 18px; font-weight: 800;
+      font-family: Arial, Tahoma, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(230,0,90,.22);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <a class="back" href="calculator.html" aria-label="رجوع">←</a>
+      <p class="header-title">معلومات المشتري</p>
+      <span></span>
+    </header>
+    <div class="steps" aria-label="خطوات الطلب">
+      <div class="step active" aria-label="الخطوة 1 – الحالية">1</div>
+      <div class="step" aria-label="الخطوة 2">2</div>
+      <div class="step" aria-label="الخطوة 3">3</div>
+    </div>
+    <form class="form" id="step1Form" novalidate>
+      <h1>معلوماتك الشخصية</h1>
+
+      <div class="field" id="f-firstName">
+        <label for="firstName">الاسم الأول</label>
+        <input id="firstName" name="firstName" type="text" placeholder="مثلاً لطيفة" autocomplete="given-name">
+        <p class="hint">الرجاء إدخال الاسم الأول</p>
+      </div>
+
+      <div class="field" id="f-lastName">
+        <label for="lastName">اسم العائلة</label>
+        <input id="lastName" name="lastName" type="text" placeholder="مثلاً عبدالله" autocomplete="family-name">
+        <p class="hint">الرجاء إدخال اسم العائلة</p>
+      </div>
+
+      <div class="field" id="f-phone">
+        <label for="phone">رقم الجوال</label>
+        <div class="phone-wrap">
+          <input id="phone" name="phone" type="tel" placeholder="" autocomplete="tel">
+          <div class="code"><span class="flag"></span><span>+965</span></div>
+        </div>
+        <p class="hint">الرجاء إدخال رقم الجوال</p>
+      </div>
+
+      <button class="save" type="submit">التالي – عنوان التوصيل</button>
+    </form>
+  </main>
+  <script>
+    const form = document.getElementById('step1Form');
+    const fields = [
+      { id: 'firstName', wrap: 'f-firstName' },
+      { id: 'lastName', wrap: 'f-lastName' },
+      { id: 'phone', wrap: 'f-phone' }
+    ];
+
+    function validate(id, wrapId) {
+      const input = document.getElementById(id);
+      const wrap = document.getElementById(wrapId);
+      const ok = input.value.trim().length > 0;
+      wrap.classList.toggle('error', !ok);
+      return ok;
+    }
+
+    fields.forEach(function(f) {
+      document.getElementById(f.id).addEventListener('input', function() {
+        validate(f.id, f.wrap);
+      });
+    });
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const allOk = fields.every(function(f) { return validate(f.id, f.wrap); });
+      if (!allOk) return;
+      sessionStorage.setItem('buyer_name', document.getElementById('firstName').value.trim() + ' ' + document.getElementById('lastName').value.trim());
+      sessionStorage.setItem('buyer_phone', document.getElementById('phone').value.trim());
+      window.location.href = 'step2.html';
+    });
+  </script>
+</body>
+</html>
