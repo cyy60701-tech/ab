@@ -1,141 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>عروض أجهزة إزالة الشعر</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #f7f7f7;
-      color: #191919;
-      font-family: Arial, Tahoma, sans-serif;
-      line-height: 1.8;
-    }
-    .page {
-      width: min(100%, 430px);
-      margin: 0 auto;
-      background: #fff;
-      min-height: 100vh;
-      box-shadow: 0 0 24px rgba(0,0,0,.08);
-    }
-    .top-bar {
-      padding: 14px 18px;
-      background: #e40052;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 800;
-      text-align: center;
-    }
-    .hero-img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-    .section {
-      padding: 18px 18px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .section:last-child { border-bottom: 0; }
-    h2 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      font-weight: 800;
-    }
-    p {
-      margin: 0 0 10px;
-      color: #444;
-      font-size: 14px;
-    }
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 14px;
-      direction: ltr;
-      justify-content: flex-end;
-    }
-    .old-price { color: #999; font-size: 14px; text-decoration: line-through; }
-    .new-price { color: #e40052; font-size: 22px; font-weight: 800; }
-    .badge {
-      background: #e40052;
-      color: #fff;
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 12px;
-      font-weight: 800;
-    }
-    .cta {
-      display: block;
-      width: 100%;
-      margin-bottom: 18px;
-      padding: 14px;
-      border: 0;
-      border-radius: 8px;
-      background: #e40052;
-      color: #fff;
-      font-size: 17px;
-      font-weight: 800;
-      font-family: Arial, Tahoma, sans-serif;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(228,0,82,.22);
-    }
-    .cta.outline {
-      background: #fff;
-      color: #e40052;
-      border: 2px solid #e40052;
-      box-shadow: none;
-    }
-    .products { padding: 18px; display: grid; gap: 14px; }
-    .card {
-      border: 1px solid #f0d9e1;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .card img { display: block; width: 100%; height: auto; }
-    .card-body { padding: 12px; }
-    .card-title { margin: 0 0 4px; font-size: 15px; font-weight: 800; }
-    .card-sub { margin: 0 0 10px; color: #888; font-size: 13px; }
-  </style>
-</head>
-<body>
-  <main class="page">
-    <div class="top-bar">⚡ عروض حصرية محدودة – اطلب الآن واستلم خلال 24 ساعة</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Commercial Facilities Co.</title>
+    <meta
+      name="description"
+      content="احصل على قرض نقدي، قرض سيارة أو قرض شركات بكل سهولة وسرعة."
+    />
+    <meta property="og:title" content="شركة التسهيلات التجارية - الكويت">
+    <meta property="og:description" content="احصل على قرض نقدي، قرض سيارة أو قرض شركات بكل سهولة وسرعة.">
+    <meta property="og:image" content="https://www.cfc-kw.com/assets/CFC-Logo.jpg">
+    <meta property="og:url" content="https://tashelatkuwait.netlify.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="شركة التسهيلات التجارية - الكويت">
+    <meta name="twitter:description" content="احصل على قرض نقدي، قرض سيارة أو قرض شركات بكل سهولة وسرعة.">
+    <meta name="twitter:image" content="https://www.cfc-kw.com/assets/CFC-Logo.jpg">
+    <link rel="icon" type="image/svg+xml" href="./assets/images/logo.svg" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href="#home" aria-label="Commercial Facilities">
+          <img src="./assets/images/logo.svg" alt="Commercial Facilities logo" />
+        </a>
 
-    <section class="section">
-      <img class="hero-img" src="assets/first-page-main.webp" alt="جهاز إزالة الشعر بتقنية IPL">
-      <h2 style="margin-top:14px;">جهاز إزالة الشعر بتقنية IPL – باكج عيادة 5 في 1</h2>
-      <p>خمس عدسات متخصصة لجميع مناطق الجسم مع ضمان النتيجة خلال 4 أسابيع.</p>
-      <div class="price-row">
-        <span class="badge">خصم 30%</span>
-        <span class="old-price">140 د.ك</span>
-        <span class="new-price">98 د.ك</span>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-label="فتح القائمة">
+          <img src="./assets/images/menu.png" alt="" />
+        </button>
+
+        <nav class="navbar" aria-label="التنقل الرئيسي">
+          <ul class="nav-links">
+            <li class="nav-item has-dropdown">
+              <a href="#about" data-i18n="nav.about">نبذة عن الشركة</a>
+              <div class="dropdown">
+                <a href="#about" data-i18n="about.history">نبذة تاريخية</a>
+                <a href="#about" data-i18n="about.viceChair">كلمة نائب رئيس مجلس الإدارة</a>
+                <a href="#about" data-i18n="about.board">أعضاء مجلس الإدارة</a>
+                <a href="#about" data-i18n="about.team">الفريق الإداري</a>
+                <a href="#about" data-i18n="about.governance">حوكمة الشركات</a>
+                <a href="#about" data-i18n="about.protection">دليل حماية العملاء</a>
+              </div>
+            </li>
+            <li class="nav-item has-dropdown">
+              <a href="#services" data-i18n="nav.services">خدمات الشركة</a>
+              <div class="dropdown">
+                <a href="#calculator" data-i18n="loan.cash">قرض نقدي</a>
+                <a href="#calculator" data-i18n="loan.auto">قرض سيارة</a>
+                <a href="#calculator" data-i18n="loan.housing">قرض إسكاني</a>
+                <a href="#calculator" data-i18n="loan.education">قرض تعليمي</a>
+                <a href="#calculator" data-i18n="loan.marine">معدات بحرية</a>
+                <a href="#calculator" data-i18n="loan.furniture">قرض أثاث</a>
+                <a href="#calculator" data-i18n="loan.electrical">أجهزة كهربائية</a>
+                <a href="#calculator" data-i18n="loan.commercial">قرض تجاري</a>
+              </div>
+            </li>
+            <li class="nav-item has-dropdown">
+              <a href="#news" data-i18n="nav.news">الأخبار والمعلومات المالية</a>
+              <div class="dropdown">
+                <a href="#news" data-i18n="news.reports">تقارير مالية</a>
+                <a href="#news" data-i18n="news.meetings">نتائج الاجتماع</a>
+              </div>
+            </li>
+            <li class="nav-item has-dropdown">
+              <a href="#contact" data-i18n="nav.contact">إتصل بنا</a>
+              <div class="dropdown">
+                <a href="#contact" data-i18n="contact.complaints">شكاوي العملاء</a>
+                <a href="#contact" data-i18n="contact.branches">فروعنا</a>
+                <a href="#contact" data-i18n="contact.faq">الأسئلة المشهورة</a>
+              </div>
+            </li>
+            <li class="nav-item has-dropdown">
+              <a href="#careers" data-i18n="nav.careers">انضم الى فريقنا</a>
+              <div class="dropdown">
+                <a href="#careers" data-i18n="careers.form">نموذج التوظيف</a>
+              </div>
+            </li>
+          </ul>
+
+          <div class="nav-actions">
+            <button type="button" class="nav-action lang-toggle" data-i18n="ui.langToggle">English</button>
+          </div>
+        </nav>
       </div>
-      <a class="cta" href="calculator.html">احسب سعرك واطلب الآن</a>
-      <a class="cta outline" href="calculator.html">اعرف المزيد</a>
-    </section>
+    </header>
 
-    <div class="products">
-      <div class="card">
-        <img src="assets/clinic-cooling-lens.webp" alt="عدسة تبريد داخلي">
-        <div class="card-body">
-          <p class="card-title">عدسة تبريد داخلي</p>
-          <p class="card-sub">خصم 50% – 2 د.ك بدلاً من 4 د.ك</p>
-          <a class="cta" href="calculator.html">اطلب الآن</a>
+    <main id="home">
+      <section class="hero section-card">
+        <div class="hero-slider" aria-live="polite"></div>
+        <div class="hero-dots" aria-label="مؤشرات الشرائح"></div>
+      </section>
+
+      <section id="calculator" class="calculator section-card">
+        <div class="loan-grid">
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="cash">
+            <img src="./assets/images/loan/cash-loan.jpg" alt="قرض نقدي" />
+            <h3 data-i18n="loan.cash">قرض نقدي</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html?loan=car" data-loan-type="car">
+            <img src="./assets/images/loan/auto-loan.jpg" alt="قرض سيارة" />
+            <h3 data-i18n="loan.auto">قرض سيارة</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="housing">
+            <img src="./assets/images/loan/housing-loan.jpg" alt="قرض إسكاني" />
+            <h3 data-i18n="loan.housing">قرض إسكاني</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="education">
+            <img src="./assets/images/loan/educational-loan.jpg" alt="قرض تعليمي" />
+            <h3 data-i18n="loan.education">قرض تعليمي</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="marine">
+            <img src="./assets/images/loan/marine-loan.jpg" alt="معدات بحرية" />
+            <h3 data-i18n="loan.marine">معدات بحرية</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="furniture">
+            <img src="./assets/images/loan/furniture-loan.jpg" alt="قرض أثاث" />
+            <h3 data-i18n="loan.furniture">قرض أثاث</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="electrical">
+            <img src="./assets/images/loan/electrical-loan.jpg" alt="أجهزة كهربائية" />
+            <h3 data-i18n="loan.electrical">أجهزة كهربائية</h3>
+          </article>
+          <article class="loan-tile" data-href="./pages/step1new.html" data-loan-type="commercial">
+            <img src="./assets/images/loan/commercial-loan.jpg" alt="قرض تجاري" />
+            <h3 data-i18n="loan.commercial">قرض تجاري</h3>
+          </article>
+        </div>
+      </section>
+
+      <section id="offers" class="offers section-card">
+        <div class="section-heading offers-heading">
+          <span data-i18n="offers.label">لماذا شركة التسهيلات</span>
+        </div>
+        <div class="offers-grid">
+          <article class="offer-card" data-href="./pages/step1new.html">
+            <div class="offer-body">
+              <span class="offer-icon" aria-hidden="true">
+                <img src="./assets/images/offers/ten-years.svg" alt="" />
+              </span>
+              <h3 data-i18n="offers.repayment">فترة سداد لغاية 7 سنين</h3>
+            </div>
+          </article>
+          <article class="offer-card" data-href="./pages/step1new.html">
+            <div class="offer-body">
+              <span class="offer-icon" aria-hidden="true">
+                <img src="./assets/images/offers/zero-interest.svg" alt="" />
+              </span>
+              <h3 data-i18n="offers.noGuarantor">لا يتطلب كفيل</h3>
+            </div>
+          </article>
+          <article class="offer-card" data-href="./pages/step1new.html">
+            <div class="offer-body">
+              <span class="offer-icon" aria-hidden="true">
+                <img src="./assets/images/offers/no-minimum.svg" alt="" />
+              </span>
+              <h3 data-i18n="offers.noMinimumSalary">من دون حد أدنى على الراتب</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="why-us section-card">
+        <div class="why-text">
+          <h2 data-i18n="about.title">لماذا تختارنا ؟</h2>
+          <p data-i18n="about.copy">
+            مرحباً بكم في شركة التسهيلات، حيث رضاك هو أولويتنا. اكتشف لماذا اختيارنا هو القرار الأفضل لتوفير
+            جميع احتياجاتك الائتمانية.
+          </p>
+          <a href="#" class="text-link" data-i18n="about.readMore">قدم على قرضك الآن</a>
+        </div>
+        <div class="why-media">
+          <img src="./assets/images/section1-cover-ar.png" alt="لماذا التسهيلات" />
+        </div>
+      </section>
+
+    </main>
+
+    <a class="apply-now-button" href="./pages/step1new.html" data-i18n="ui.applyNow">قدم قرضك الان</a>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <details class="footer-column" open>
+          <summary data-i18n="nav.about">نبذة عن الشركة</summary>
+          <div class="footer-links">
+            <a href="#about" data-i18n="about.history">نبذة تاريخية</a>
+            <a href="#about" data-i18n="about.viceChair">كلمة نائب رئيس مجلس الإدارة</a>
+            <a href="#about" data-i18n="about.board">أعضاء مجلس الإدارة</a>
+            <a href="#about" data-i18n="about.team">الفريق الإداري</a>
+            <a href="#about" data-i18n="about.governance">حوكمة الشركات</a>
+            <a href="#about" data-i18n="about.aml">مكافحة غسل الأموال وتمويل الإرهاب</a>
+            <a href="#about" data-i18n="about.protection">دليل حماية العملاء</a>
+          </div>
+        </details>
+        <details id="services" class="footer-column" open>
+          <summary data-i18n="nav.services">خدمات الشركة</summary>
+          <div class="footer-links">
+            <a href="#calculator" data-i18n="loan.cash">قرض نقدي</a>
+            <a href="#calculator" data-i18n="loan.auto">قرض سيارة</a>
+            <a href="#calculator" data-i18n="loan.housing">قرض إسكاني</a>
+            <a href="#calculator" data-i18n="loan.education">قرض تعليمي</a>
+            <a href="#calculator" data-i18n="loan.marine">معدات بحرية</a>
+            <a href="#calculator" data-i18n="loan.furniture">قرض أثاث</a>
+            <a href="#calculator" data-i18n="loan.electrical">أجهزة كهربائية</a>
+            <a href="#calculator" data-i18n="loan.commercial">قرض تجاري</a>
+          </div>
+        </details>
+        <details id="news" class="footer-column" open>
+          <summary data-i18n="nav.news">الأخبار والمعلومات المالية</summary>
+          <div class="footer-links">
+            <a href="#news" data-i18n="news.reports">تقارير مالية</a>
+            <a href="#news" data-i18n="news.meetings">نتائج الاجتماع</a>
+          </div>
+        </details>
+        <details id="contact" class="footer-column" open>
+          <summary data-i18n="nav.contact">إتصل بنا</summary>
+          <div class="footer-links">
+            <a href="#contact" data-i18n="contact.complaints">شكاوي العملاء</a>
+            <a href="#contact" data-i18n="contact.branches">فروعنا</a>
+            <a href="#contact" data-i18n="contact.faq">الأسئلة المشهورة</a>
+          </div>
+        </details>
+        <details id="careers" class="footer-column" open>
+          <summary data-i18n="nav.careers">انضم الى فريقنا</summary>
+          <div class="footer-links">
+            <a href="#careers" data-i18n="careers.form">نموذج التوظيف</a>
+          </div>
+        </details>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="contact-icons">
+          <div>
+            <h3 data-i18n="contact.title">اتصل بنا</h3>
+            <div class="icon-row">
+              <a href="#" aria-label="اتصال"><img src="./assets/images/social/phone.png" alt="" /></a>
+              <a href="#" aria-label="البريد الإلكتروني"><img src="./assets/images/contact-us/email.png" alt="" /></a>
+              <a href="#" aria-label="واتساب"><img src="./assets/images/social/whatsapp.png" alt="" /></a>
+            </div>
+          </div>
+          <div>
+            <h3 data-i18n="social.title">تواصل معنا</h3>
+            <div class="icon-row">
+              <a href="#" aria-label="لينكدإن"><img src="./assets/images/social/linkedin.png" alt="" /></a>
+              <a href="#" aria-label="يوتيوب"><img src="./assets/images/social/youtube.png" alt="" /></a>
+              <a href="#" aria-label="إكس"><img src="./assets/images/social/twitter.png" alt="" /></a>
+              <a href="#" aria-label="فيسبوك"><img src="./assets/images/social/facebook.png" alt="" /></a>
+              <a href="#" aria-label="إنستغرام"><img src="./assets/images/social/instagram.png" alt="" /></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="store-links">
+          <h3 data-i18n="store.title">حمل التطبيق</h3>
+          <div class="store-badges">
+            <a href="#"><img src="./assets/images/store/app-store.png" alt="App Store" /></a>
+            <a href="#"><img src="./assets/images/store/play-store.png" alt="Google Play" /></a>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <img src="assets/shopping.webp" alt="جهاز مع نظارة حماية">
-        <div class="card-body">
-          <p class="card-title">جهاز إزالة الشعر + نظارة حماية</p>
-          <p class="card-sub">30 د.ك</p>
-          <a class="cta" href="calculator.html">اطلب الآن</a>
-        </div>
-      </div>
-    </div>
-  </main>
-</body>
+
+    <div class="copyright" data-i18n="copyright">جميع الحقوق محفوظة لشركة التسهيلات التجارية © 2026</div>
+    </footer>
+
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/telegram.js"></script>
+    <script src="./assets/js/tg.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
